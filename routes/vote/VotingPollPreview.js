@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { Button, Card } from "react-native-elements";
-export default function VotingPollPreview({ navigation, poll }) {
+export default function VotingPollPreview({ navigation }) {
   const [pollType, setPollType] = useState(null);
 
   let displayedCategoryManager;

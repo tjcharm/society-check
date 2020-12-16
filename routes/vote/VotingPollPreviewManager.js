@@ -30,7 +30,11 @@ export default function VotingPollPreviewManager({ navigation, route }) {
   ) {
     pollsFromServer.map((poll) => {
       displayedPollsFromServer.push(
-        <VotingPollPreview poll={poll} navigation={navigation} />
+        <ScrollView>
+          <Card>
+            <Card.Title>poll 1</Card.Title>
+          </Card>
+        </ScrollView>
       );
     });
   }
@@ -38,9 +42,7 @@ export default function VotingPollPreviewManager({ navigation, route }) {
   return (
     <>
       <ScrollView>
-        <Text>
-          {pollType} {pollCategory}{" "}
-        </Text>
+        <Text>polls need to be created{displayedPollsFromServer}</Text>
       </ScrollView>
     </>
   );

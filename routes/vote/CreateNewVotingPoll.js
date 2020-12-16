@@ -1,8 +1,44 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
-import { Button, Card } from "react-native-elements";
+import { Button, Card, Input } from "react-native-elements";
+import { ScrollView } from "react-native-gesture-handler";
+import { pollCategories } from "../../appConfig/PollCategories";
 export default function VotingPollPreview({ navigation }) {
   const [pollType, setPollType] = useState(null);
+  const [pollCategory, setPollCategory] = useState(null);
+
+  const [
+    pollCategoriesFromAppConfig,
+    setpollCategoriesFromAppConfig,
+  ] = useState(pollCategories);
+
+  let displayedCats = [];
+
+  if (
+    pollCategoriesFromAppConfig != null &&
+    pollCategoriesFromAppConfig !== undefined &&
+    pollCategoriesFromAppConfig.length > 0
+  ) {
+    pollCategoriesFromAppConfig.map((cat) => {
+      displayedCats.push(
+        <Button
+          key={cat}
+          title={cat}
+          type="solid"
+          buttonStyle={{ margin: 10 }}
+          onPress={() => {
+            setPollCategory(cat);
+          }}
+        />
+      );
+    });
+  } else {
+    return (
+      <View>
+        <Text>nothing here yet</Text>
+      </View>
+    );
+  }
 
   let displayedCreateNewVotingPoll;
   if (pollType === null) {
@@ -31,21 +67,31 @@ export default function VotingPollPreview({ navigation }) {
         </Card>
       </View>
     );
-  } else if (pollType === "singleQuestion") {
+  } else if (
+    pollType != null &&
+    pollType != undefined &&
+    pollCategory == null
+  ) {
     displayedCreateNewVotingPoll = (
-      <Card>
-        <Card.Title>
-          single question poll. voting poll preview card title
-        </Card.Title>
-      </Card>
+      <ScrollView>
+        <Card>
+          <Card.Title>What category does your poll fall under?</Card.Title>
+          {displayedCats}
+        </Card>
+      </ScrollView>
     );
-  } else if (pollType === "multipleQuestion") {
+  } else if (
+    pollType != null &&
+    pollType != undefined &&
+    pollCategory != null &&
+    pollCategory != undefined
+  ) {
     displayedCreateNewVotingPoll = (
-      <Card>
-        <Card.Title>
-          multiple question poll. voting poll preview card title
-        </Card.Title>
-      </Card>
+      <ScrollView>
+        <Card>
+          <Input placeholder="poll info" />
+        </Card>
+      </ScrollView>
     );
   }
 

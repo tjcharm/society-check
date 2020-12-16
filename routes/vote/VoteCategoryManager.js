@@ -45,7 +45,7 @@ export default function VoteCategoryManager({ navigation, route }) {
     <>
       <ScrollView>
         <Button
-          title="Ask for a vote"
+          title="Create A Poll"
           type="outline"
           buttonStyle={{ margin: 10 }}
           onPress={() => {

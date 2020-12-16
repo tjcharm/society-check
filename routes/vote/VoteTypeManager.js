@@ -58,7 +58,7 @@ export default function VoteTypeManager({ navigation }) {
     <>
       <View>
         <Button
-          title="Ask for a vote"
+          title="Create A Poll"
           type="outline"
           buttonStyle={{ margin: 10 }}
           onPress={() => {
