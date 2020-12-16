@@ -89,7 +89,7 @@ export default function VotingPollPreview({ navigation }) {
     displayedCreateNewVotingPoll = (
       <ScrollView>
         <Card>
-          <Input placeholder="poll info" />
+          <Input placeholder="Main Question" />
         </Card>
       </ScrollView>
     );
