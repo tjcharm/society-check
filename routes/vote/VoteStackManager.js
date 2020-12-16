@@ -23,6 +23,7 @@ export default function Account() {
         name="Voting Poll Previews"
         component={VotingPollPreview}
       />
+      {/* need a voting poll preview manager */}
     </VoteStack.Navigator>
   );
 }

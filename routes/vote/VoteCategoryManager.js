@@ -36,6 +36,7 @@ export default function VoteCategoryManager({ navigation, route }) {
     pollCategoriesFromAppConfig.map((cat) => {
       displayedCats.push(
         <Button
+          key={cat}
           title={cat}
           type="outline"
           buttonStyle={{ margin: 10 }}
