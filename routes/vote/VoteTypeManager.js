@@ -2,34 +2,41 @@ import React, { useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { Button, Card } from "react-native-elements";
 import VotingPollPreview from "./VotingPollPreview";
-export default function VoteCategoryManager({ navigation, route }) {
-  const pollType = route.params.pollType;
-  const [pollCategory, setPollCategory] = useState(null);
+export default function VoteTypeManager({ navigation }) {
+  const [pollType, setPollType] = useState(null);
 
   let displayedCategoryManager;
-  if (pollCategory === null) {
+  if (pollType === null) {
     displayedCategoryManager = (
       <View>
         <Card>
           <Card.Title>
-            What Category would you like to look at? {pollType}
+            Would you like look at single question, or multiple question polls?
           </Card.Title>
           <Button
             buttonStyle={{ margin: 5 }}
-            title="Medical"
+            title="Single Question Polls"
             type="solid"
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate("Vote Category Manager", {
+                pollType: "singleQuestion",
+              });
+            }}
           />
           <Button
             buttonStyle={{ margin: 5 }}
-            title="Society"
+            title="Multiple Question Polls"
             type="solid"
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate("Vote Category Manager", {
+                pollType: "multipleQuestion",
+              });
+            }}
           />
         </Card>
       </View>
     );
-  } else if (pollCategory === "singleQuestion") {
+  } else if (pollType === "singleQuestion") {
     displayedCategoryManager = (
       <Card>
         <Card.Title>
@@ -37,7 +44,7 @@ export default function VoteCategoryManager({ navigation, route }) {
         </Card.Title>
       </Card>
     );
-  } else if (pollCategory === "multipleQuestion") {
+  } else if (pollType === "multipleQuestion") {
     displayedCategoryManager = (
       <Card>
         <Card.Title>

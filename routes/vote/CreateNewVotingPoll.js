@@ -4,9 +4,9 @@ import { Button, Card } from "react-native-elements";
 export default function VotingPollPreview({ navigation }) {
   const [pollType, setPollType] = useState(null);
 
-  let displayedCategoryManager;
+  let displayedCreateNewVotingPoll;
   if (pollType === null) {
-    displayedCategoryManager = (
+    displayedCreateNewVotingPoll = (
       <View>
         <Card>
           <Card.Title>
@@ -32,7 +32,7 @@ export default function VotingPollPreview({ navigation }) {
       </View>
     );
   } else if (pollType === "singleQuestion") {
-    displayedCategoryManager = (
+    displayedCreateNewVotingPoll = (
       <Card>
         <Card.Title>
           single question poll. voting poll preview card title
@@ -40,7 +40,7 @@ export default function VotingPollPreview({ navigation }) {
       </Card>
     );
   } else if (pollType === "multipleQuestion") {
-    displayedCategoryManager = (
+    displayedCreateNewVotingPoll = (
       <Card>
         <Card.Title>
           multiple question poll. voting poll preview card title
@@ -49,5 +49,5 @@ export default function VotingPollPreview({ navigation }) {
     );
   }
 
-  return <View>{displayedCategoryManager}</View>;
+  return <View>{displayedCreateNewVotingPoll}</View>;
 }
