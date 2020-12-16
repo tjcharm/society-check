@@ -1,55 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { Button, Card } from "react-native-elements";
 import VotingPollPreview from "./VotingPollPreview";
+import { pollCategories } from "../../appConfig/PollCategories";
 export default function VoteCategoryManager({ navigation, route }) {
-  const pollType = route.params.pollType;
-  const [pollCategory, setPollCategory] = useState(null);
+  const [
+    pollCategoriesFromAppConfig,
+    setpollCategoriesFromAppConfig,
+  ] = useState(pollCategories);
 
-  let displayedCategoryManager;
-  if (pollCategory === null) {
-    displayedCategoryManager = (
+  let displayedCats = [];
+
+  useEffect(() => {
+    pollCategoriesFromAppConfig.map((cat) => {
+      displayedCats.push(
+        <Button
+          title="category here"
+          type="outline"
+          buttonStyle={{ margin: 10 }}
+          onPress={() => {
+            navigation.navigate("Create New Poll");
+          }}
+        />
+      );
+    });
+  }, []);
+
+  const pollType = route.params.pollType;
+
+  if (
+    pollCategoriesFromAppConfig != null &&
+    pollCategoriesFromAppConfig !== undefined &&
+    pollCategoriesFromAppConfig.length > 0
+  ) {
+    pollCategoriesFromAppConfig.map((cat) => {
+      displayedCats.push(
+        <Button
+          title={cat}
+          type="outline"
+          buttonStyle={{ margin: 10 }}
+          onPress={() => {
+            navigation.navigate("Create New Poll");
+          }}
+        />
+      );
+    });
+  } else {
+    return (
       <View>
-        <Card>
-          <Card.Title>
-            What Category would you like to look at? {pollType}
-          </Card.Title>
-          <Button
-            buttonStyle={{ margin: 5 }}
-            title="Medical"
-            type="solid"
-            onPress={() => {}}
-          />
-          <Button
-            buttonStyle={{ margin: 5 }}
-            title="Society"
-            type="solid"
-            onPress={() => {}}
-          />
-        </Card>
+        <Text>nothing here yet</Text>
       </View>
     );
-  } else if (pollCategory === "singleQuestion") {
-    displayedCategoryManager = (
-      <Card>
-        <Card.Title>
-          single question poll. voting poll preview card title
-        </Card.Title>
-      </Card>
-    );
-  } else if (pollCategory === "multipleQuestion") {
-    displayedCategoryManager = (
-      <Card>
-        <Card.Title>
-          multiple question poll. voting poll preview card title
-        </Card.Title>
-      </Card>
-    );
   }
-
   return (
     <>
-      <View>
+      <ScrollView>
         <Button
           title="Ask for a vote"
           type="outline"
@@ -58,8 +63,11 @@ export default function VoteCategoryManager({ navigation, route }) {
             navigation.navigate("Create New Poll");
           }}
         />
-      </View>
-      <ScrollView>{displayedCategoryManager}</ScrollView>
+        <Card>
+          <Card.Title>Categories</Card.Title>
+          {displayedCats}
+        </Card>
+      </ScrollView>
     </>
   );
 }
