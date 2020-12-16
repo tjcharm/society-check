@@ -11,21 +11,6 @@ export default function VoteCategoryManager({ navigation, route }) {
 
   let displayedCats = [];
 
-  useEffect(() => {
-    pollCategoriesFromAppConfig.map((cat) => {
-      displayedCats.push(
-        <Button
-          title="category here"
-          type="outline"
-          buttonStyle={{ margin: 10 }}
-          onPress={() => {
-            navigation.navigate("Create New Poll");
-          }}
-        />
-      );
-    });
-  }, []);
-
   const pollType = route.params.pollType;
 
   if (
@@ -41,7 +26,10 @@ export default function VoteCategoryManager({ navigation, route }) {
           type="outline"
           buttonStyle={{ margin: 10 }}
           onPress={() => {
-            navigation.navigate("Create New Poll");
+            navigation.navigate("VPPreviewManager", {
+              pollType: pollType,
+              pollCategory: cat,
+            });
           }}
         />
       );

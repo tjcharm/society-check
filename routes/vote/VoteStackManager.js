@@ -5,6 +5,7 @@ import VoteCategoryManager from "./VoteCategoryManager";
 import CreateNewVotingPoll from "./CreateNewVotingPoll";
 import VotingPollPreview from "./VotingPollPreview";
 import VoteTypeManager from "./VoteTypeManager";
+import VotingPollPreviewManager from "./VotingPollPreviewManager";
 const VoteStack = createStackNavigator();
 
 export default function Account() {
@@ -22,6 +23,10 @@ export default function Account() {
       <VoteStack.Screen
         name="Voting Poll Previews"
         component={VotingPollPreview}
+      />
+      <VoteStack.Screen
+        name="VPPreviewManager"
+        component={VotingPollPreviewManager}
       />
       {/* need a voting poll preview manager */}
     </VoteStack.Navigator>
