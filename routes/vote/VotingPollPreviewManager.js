@@ -30,20 +30,33 @@ export default function VotingPollPreviewManager({ navigation, route }) {
   ) {
     pollsFromServer.map((poll) => {
       displayedPollsFromServer.push(
-        <ScrollView>
-          <Card>
-            <Card.Title>poll 1</Card.Title>
-          </Card>
-        </ScrollView>
+        <Card>
+          <Card.Title>{poll.pollTitle}</Card.Title>
+          <Card.FeaturedSubtitle
+            style={{
+              color: "black",
+              textAlign: "center",
+            }}
+          >
+            {poll.singleQuestionPollQuestion}
+          </Card.FeaturedSubtitle>
+          <Button
+            title={poll.singleQuestionPollAnswerChoices}
+            type="solid"
+            onPress={() => {
+              alert(
+                `${poll.singleQuestionPollAnswerChoices} was selected, Thank you!`
+              );
+            }}
+          />
+        </Card>
       );
     });
   }
 
   return (
     <>
-      <ScrollView>
-        <Text>polls need to be created{displayedPollsFromServer}</Text>
-      </ScrollView>
+      <ScrollView>{displayedPollsFromServer}</ScrollView>
     </>
   );
 }

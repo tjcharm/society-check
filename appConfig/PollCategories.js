@@ -1,1 +1,1 @@
-export const pollCategories = ["Medical", "Society", "cars"];
+export const pollCategories = ["General", "Medical", "Society", "Cars"];
