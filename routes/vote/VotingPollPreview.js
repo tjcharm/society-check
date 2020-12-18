@@ -1,43 +1,91 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { Button, Card } from "react-native-elements";
-export default function VotingPollPreview({ navigation }) {
-  const [pollType, setPollType] = useState(null);
+export default function VotingPollPreview({ navigation, route }) {
+  const { poll, pollType } = route.params;
 
   let displayedCategoryManager;
   if (pollType === null) {
     displayedCategoryManager = (
       <View>
-        <Card>
-          <Card.Title>
-            Would you like to ask one question or more than one?
+        <Card
+          containerStyle={{
+            backgroundColor: "#333",
+            borderRadius: 8,
+            minHeight: "100%",
+          }}
+        >
+          <Card.Title style={{ color: "white", fontSize: 25 }}>
+            {poll.pollTitle}
           </Card.Title>
-          <Button
-            buttonStyle={{ margin: 5 }}
-            title="One Question"
-            type="solid"
-            onPress={() => {
-              setPollType("singleQuestion");
+          <Card.FeaturedSubtitle
+            style={{
+              color: "white",
+              textAlign: "center",
+              fontSize: 20,
             }}
+          >
+            {poll.singleQuestionPollQuestion}
+          </Card.FeaturedSubtitle>
+          <Button
+            style={{ margin: 5 }}
+            title={poll.singleQuestionPollAnswerChoices}
           />
           <Button
-            buttonStyle={{ margin: 5 }}
-            title="Multiple Questions"
-            type="solid"
-            onPress={() => {
-              setPollType("multipleQuestion");
-            }}
+            style={{ margin: 5 }}
+            title={poll.singleQuestionPollAnswerChoices}
+          />
+          <Button
+            style={{ margin: 5 }}
+            title={poll.singleQuestionPollAnswerChoices}
+          />
+          <Button
+            style={{ margin: 5 }}
+            title={poll.singleQuestionPollAnswerChoices}
           />
         </Card>
       </View>
     );
   } else if (pollType === "singleQuestion") {
     displayedCategoryManager = (
-      <Card>
-        <Card.Title>
-          single question poll. voting poll preview card title
-        </Card.Title>
-      </Card>
+      <View>
+        <Card
+          containerStyle={{
+            backgroundColor: "#333",
+            borderRadius: 8,
+            minHeight: "100%",
+          }}
+        >
+          <Card.Title style={{ color: "white", fontSize: 25 }}>
+            {poll.pollTitle}
+          </Card.Title>
+          <Card.FeaturedSubtitle
+            style={{
+              color: "white",
+              textAlign: "center",
+              fontSize: 20,
+            }}
+          >
+            {poll.singleQuestionPollQuestion}
+          </Card.FeaturedSubtitle>
+          <Button
+            style={{ margin: 5 }}
+            title={poll.singleQuestionPollAnswerChoices}
+          />
+          <Button
+            style={{ margin: 5 }}
+            title={poll.singleQuestionPollAnswerChoices}
+          />
+          <Button
+            style={{ margin: 5 }}
+            title={poll.singleQuestionPollAnswerChoices}
+          />
+          <Button
+            style={{ margin: 5 }}
+            title={poll.singleQuestionPollAnswerChoices}
+          />
+        </Card>
+      </View>
     );
   } else if (pollType === "multipleQuestion") {
     displayedCategoryManager = (
@@ -49,5 +97,5 @@ export default function VotingPollPreview({ navigation }) {
     );
   }
 
-  return <View>{displayedCategoryManager}</View>;
+  return <ScrollView>{displayedCategoryManager}</ScrollView>;
 }

@@ -21,7 +21,7 @@ export default function Account() {
         component={CreateNewVotingPoll}
       />
       <VoteStack.Screen
-        name="Voting Poll Previews"
+        name="Voting Poll Preview"
         component={VotingPollPreview}
       />
       <VoteStack.Screen

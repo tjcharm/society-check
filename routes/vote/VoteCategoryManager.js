@@ -44,14 +44,6 @@ export default function VoteCategoryManager({ navigation, route }) {
   return (
     <>
       <ScrollView>
-        <Button
-          title="Create A Poll"
-          type="outline"
-          buttonStyle={{ margin: 10 }}
-          onPress={() => {
-            navigation.navigate("Create New Poll");
-          }}
-        />
         <Card>
           <Card.Title>Categories</Card.Title>
           {displayedCats}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { Button, Card } from "react-native-elements";
 import VotingPollPreview from "./VotingPollPreview";
 import { API } from "../../appConfig/ReactStoreApi";
@@ -30,26 +30,27 @@ export default function VotingPollPreviewManager({ navigation, route }) {
   ) {
     pollsFromServer.map((poll) => {
       displayedPollsFromServer.push(
-        <Card>
-          <Card.Title>{poll.pollTitle}</Card.Title>
-          <Card.FeaturedSubtitle
-            style={{
-              color: "black",
-              textAlign: "center",
-            }}
-          >
-            {poll.singleQuestionPollQuestion}
-          </Card.FeaturedSubtitle>
-          <Button
-            title={poll.singleQuestionPollAnswerChoices}
-            type="solid"
-            onPress={() => {
-              alert(
-                `${poll.singleQuestionPollAnswerChoices} was selected, Thank you!`
-              );
-            }}
-          />
-        </Card>
+        <TouchableOpacity
+          key={poll.pollTitle}
+          onPress={() => {
+            navigation.navigate("Voting Poll Preview", {
+              poll: poll,
+              pollType: pollType,
+            });
+          }}
+        >
+          <Card>
+            <Card.Title>{poll.pollTitle}</Card.Title>
+            <Card.FeaturedSubtitle
+              style={{
+                color: "black",
+                textAlign: "center",
+              }}
+            >
+              {poll.singleQuestionPollQuestion}
+            </Card.FeaturedSubtitle>
+          </Card>
+        </TouchableOpacity>
       );
     });
   }
