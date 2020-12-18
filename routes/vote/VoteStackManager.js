@@ -6,6 +6,8 @@ import CreateNewVotingPoll from "./CreateNewVotingPoll";
 import VotingPollPreview from "./VotingPollPreview";
 import VoteTypeManager from "./VoteTypeManager";
 import VotingPollPreviewManager from "./VotingPollPreviewManager";
+import CreateSingleQuestionPoll from "./CreateSingleQuestionPoll";
+import CreateMultipleQuestionPoll from "./CreateMultipleQuestionPoll";
 const VoteStack = createStackNavigator();
 
 export default function Account() {
@@ -19,6 +21,14 @@ export default function Account() {
       <VoteStack.Screen
         name="Create New Poll"
         component={CreateNewVotingPoll}
+      />
+      <VoteStack.Screen
+        name="Create Single Question Poll"
+        component={CreateSingleQuestionPoll}
+      />
+      <VoteStack.Screen
+        name="Create Multiple Question Poll"
+        component={CreateMultipleQuestionPoll}
       />
       <VoteStack.Screen
         name="Voting Poll Preview"

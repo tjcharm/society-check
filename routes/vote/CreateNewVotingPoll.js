@@ -5,6 +5,9 @@ import { ScrollView } from "react-native-gesture-handler";
 import { pollCategories } from "../../appConfig/PollCategories";
 import { API } from "../../appConfig/ReactStoreApi";
 export default function VotingPollPreview({ navigation }) {
+  const [newAnswers, setNewAnswers] = useState([]);
+
+  // form choices
   const [pollType, setPollType] = useState(null);
   const [pollCategory, setPollCategory] = useState(null);
   const [pollId, setPollId] = useState(1);
@@ -48,29 +51,6 @@ export default function VotingPollPreview({ navigation }) {
     multipleQuestionPollQuestions: multipleQuestionPollQuestions,
     multipleQuestionPollAnswerChoices: multipleQuestionPollAnswerChoices,
   };
-
-  let answerChoiceView = (
-    <View style={{ flexDirection: "row" }}>
-      <Input
-        containerStyle={{ width: "70%" }}
-        placeholder="answer choice here"
-        onChangeText={(text) => {
-          setSingleQuestionPollAnswerChoices(text);
-        }}
-      />
-      <Button
-        containerStyle={{
-          width: "30%",
-        }}
-        title="+"
-        type="outline"
-        onPress={async () => {
-          displayedAnswerChoices.push(answerChoiceView);
-        }}
-        buttonStyle={{ marginBottom: 20 }}
-      />
-    </View>
-  );
 
   let createNewPoll = async () => {
     fetch(`${API}/votingPolls/createNewVotingPoll`, {
@@ -117,9 +97,8 @@ export default function VotingPollPreview({ navigation }) {
     );
   }
 
-  let displayedCreateNewVotingPoll;
-  if (pollType === null) {
-    displayedCreateNewVotingPoll = (
+  return (
+    <ScrollView>
       <View>
         <Card>
           <Card.Title>
@@ -131,6 +110,7 @@ export default function VotingPollPreview({ navigation }) {
             type="solid"
             onPress={() => {
               setPollType("singleQuestion");
+              navigation.navigate("Create Single Question Poll");
             }}
           />
           <Button
@@ -139,86 +119,11 @@ export default function VotingPollPreview({ navigation }) {
             type="solid"
             onPress={() => {
               setPollType("multipleQuestion");
+              navigation.navigate("Create Multiple Question Poll");
             }}
           />
         </Card>
       </View>
-    );
-  } else if (
-    pollType != null &&
-    pollType != undefined &&
-    pollCategory == null
-  ) {
-    displayedCreateNewVotingPoll = (
-      <ScrollView>
-        <Card>
-          <Card.Title>What category does your poll fall under best?</Card.Title>
-          {displayedCats}
-        </Card>
-      </ScrollView>
-    );
-  } else if (
-    pollType != null &&
-    pollType != undefined &&
-    pollType === "singleQuestion" &&
-    pollCategory != null &&
-    pollCategory != undefined
-  ) {
-    displayedCreateNewVotingPoll = (
-      <ScrollView>
-        <Card>
-          <Input
-            placeholder="Poll Title"
-            onChangeText={(text) => {
-              setPollTitle(text);
-            }}
-          />
-          <Input
-            placeholder="Question"
-            onChangeText={(text) => {
-              setSingleQuestionPollQuestion(text);
-            }}
-          />
-          <Input
-            placeholder="Number of answers wanted"
-            onChangeText={(text) => {
-              setRequiredPollAnswersToEnd(text);
-            }}
-          />
-          <View style={{ flexDirection: "row" }}>
-            <Input
-              containerStyle={{ width: "70%" }}
-              placeholder="answer choice here"
-              onChangeText={(text) => {
-                setSingleQuestionPollAnswerChoices(text);
-              }}
-            />
-
-            <Button
-              containerStyle={{
-                width: "30%",
-              }}
-              title="+"
-              type="outline"
-              onPress={() => {
-                alert("hello");
-                // THERE SHOULD BE A WAY TO DYNAMICALLY ADD ANSWER CHOICES
-              }}
-              buttonStyle={{ marginBottom: 20 }}
-            />
-          </View>
-
-          <Button
-            type="solid"
-            title="CREATE POLL"
-            onPress={() => {
-              createNewPoll();
-            }}
-          />
-        </Card>
-      </ScrollView>
-    );
-  }
-
-  return <ScrollView>{displayedCreateNewVotingPoll}</ScrollView>;
+    </ScrollView>
+  );
 }
