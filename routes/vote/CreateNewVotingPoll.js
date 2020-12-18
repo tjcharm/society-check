@@ -5,25 +5,6 @@ import { ScrollView } from "react-native-gesture-handler";
 import { pollCategories } from "../../appConfig/PollCategories";
 import { API } from "../../appConfig/ReactStoreApi";
 export default function VotingPollPreview({ navigation }) {
-  const [numOfAnswers, setNumOfAnswers] = useState(2);
-  const [newAnswerChoices, setNewAnswerChoices] = useState(null);
-
-  let addAnswers = async () => {
-    console.log("add answers activated");
-    await setNewAnswerChoices(extraAnswers);
-    console.log(newAnswerChoices);
-  };
-
-  let extraAnswers = [
-    <Input
-      key={numOfAnswers}
-      placeholder="answer choice here"
-      onChangeText={(text) => {
-        setSingleQuestionPollAnswerChoices(text);
-      }}
-    />,
-  ];
-
   const [pollType, setPollType] = useState(null);
   const [pollCategory, setPollCategory] = useState(null);
   const [pollId, setPollId] = useState(1);
@@ -67,6 +48,29 @@ export default function VotingPollPreview({ navigation }) {
     multipleQuestionPollQuestions: multipleQuestionPollQuestions,
     multipleQuestionPollAnswerChoices: multipleQuestionPollAnswerChoices,
   };
+
+  let answerChoiceView = (
+    <View style={{ flexDirection: "row" }}>
+      <Input
+        containerStyle={{ width: "70%" }}
+        placeholder="answer choice here"
+        onChangeText={(text) => {
+          setSingleQuestionPollAnswerChoices(text);
+        }}
+      />
+      <Button
+        containerStyle={{
+          width: "30%",
+        }}
+        title="+"
+        type="outline"
+        onPress={async () => {
+          displayedAnswerChoices.push(answerChoiceView);
+        }}
+        buttonStyle={{ marginBottom: 20 }}
+      />
+    </View>
+  );
 
   let createNewPoll = async () => {
     fetch(`${API}/votingPolls/createNewVotingPoll`, {
@@ -181,36 +185,29 @@ export default function VotingPollPreview({ navigation }) {
               setRequiredPollAnswersToEnd(text);
             }}
           />
-          <>
+          <View style={{ flexDirection: "row" }}>
             <Input
+              containerStyle={{ width: "70%" }}
               placeholder="answer choice here"
               onChangeText={(text) => {
                 setSingleQuestionPollAnswerChoices(text);
               }}
             />
-            <Text>{numOfAnswers}</Text>
-            {/* {newAnswerChoices} */}
-            {extraAnswers}
 
             <Button
+              containerStyle={{
+                width: "30%",
+              }}
               title="+"
               type="outline"
-              onPress={async () => {
-                await extraAnswers.push(
-                  <Input
-                    key={numOfAnswers}
-                    placeholder="answer choice here"
-                    onChangeText={(text) => {
-                      setSingleQuestionPollAnswerChoices(text);
-                    }}
-                  />
-                );
-                await setNumOfAnswers(numOfAnswers + 1);
-                addAnswers();
+              onPress={() => {
+                alert("hello");
+                // THERE SHOULD BE A WAY TO DYNAMICALLY ADD ANSWER CHOICES
               }}
               buttonStyle={{ marginBottom: 20 }}
             />
-          </>
+          </View>
+
           <Button
             type="solid"
             title="CREATE POLL"
@@ -223,5 +220,5 @@ export default function VotingPollPreview({ navigation }) {
     );
   }
 
-  return <View>{displayedCreateNewVotingPoll}</View>;
+  return <ScrollView>{displayedCreateNewVotingPoll}</ScrollView>;
 }

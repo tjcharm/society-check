@@ -11,7 +11,7 @@ const AppTab = createBottomTabNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <AppTab.Navigator>
+      <AppTab.Navigator initialRouteName="Vote">
         <AppTab.Screen name="Home" component={HomeStackManager} />
         <AppTab.Screen name="Vote" component={VoteStackManager} />
         <AppTab.Screen name="Discuss" component={DiscussStackManager} />
