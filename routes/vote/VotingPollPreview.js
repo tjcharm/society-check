@@ -4,6 +4,21 @@ import { Button, Card } from "react-native-elements";
 export default function VotingPollPreview({ navigation, route }) {
   const { poll, pollType } = route.params;
 
+  const singleQuestionPollAnswerChoices = [];
+
+  poll.singleQuestionPollAnswerChoices.map((answer) => {
+    singleQuestionPollAnswerChoices.push(
+      <Button
+        key={answer}
+        title={answer}
+        type="solid"
+        onPress={() => {
+          alert(`${answer}`);
+        }}
+      />
+    );
+  });
+
   let displayedCategoryManager;
   if (pollType === null) {
     displayedCategoryManager = (
@@ -27,22 +42,6 @@ export default function VotingPollPreview({ navigation, route }) {
           >
             {poll.singleQuestionPollQuestion}
           </Card.FeaturedSubtitle>
-          <Button
-            style={{ margin: 5 }}
-            title={poll.singleQuestionPollAnswerChoices}
-          />
-          <Button
-            style={{ margin: 5 }}
-            title={poll.singleQuestionPollAnswerChoices}
-          />
-          <Button
-            style={{ margin: 5 }}
-            title={poll.singleQuestionPollAnswerChoices}
-          />
-          <Button
-            style={{ margin: 5 }}
-            title={poll.singleQuestionPollAnswerChoices}
-          />
         </Card>
       </View>
     );
@@ -68,22 +67,7 @@ export default function VotingPollPreview({ navigation, route }) {
           >
             {poll.singleQuestionPollQuestion}
           </Card.FeaturedSubtitle>
-          <Button
-            style={{ margin: 5 }}
-            title={poll.singleQuestionPollAnswerChoices}
-          />
-          <Button
-            style={{ margin: 5 }}
-            title={poll.singleQuestionPollAnswerChoices}
-          />
-          <Button
-            style={{ margin: 5 }}
-            title={poll.singleQuestionPollAnswerChoices}
-          />
-          <Button
-            style={{ margin: 5 }}
-            title={poll.singleQuestionPollAnswerChoices}
-          />
+          {singleQuestionPollAnswerChoices}
         </Card>
       </View>
     );

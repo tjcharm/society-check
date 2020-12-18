@@ -5,9 +5,27 @@ import { ScrollView } from "react-native-gesture-handler";
 import { pollCategories } from "../../appConfig/PollCategories";
 import { API } from "../../appConfig/ReactStoreApi";
 export default function VotingPollPreview({ navigation }) {
+  const [numOfAnswers, setNumOfAnswers] = useState(2);
+  const [newAnswerChoices, setNewAnswerChoices] = useState(null);
+
+  let addAnswers = async () => {
+    console.log("add answers activated");
+    await setNewAnswerChoices(extraAnswers);
+    console.log(newAnswerChoices);
+  };
+
+  let extraAnswers = [
+    <Input
+      key={numOfAnswers}
+      placeholder="answer choice here"
+      onChangeText={(text) => {
+        setSingleQuestionPollAnswerChoices(text);
+      }}
+    />,
+  ];
+
   const [pollType, setPollType] = useState(null);
   const [pollCategory, setPollCategory] = useState(null);
-
   const [pollId, setPollId] = useState(1);
   const [pollPosterUserId, setPollPosterUserId] = useState(1234);
   const [pollPosterUserUsername, setPollPosterUserUsername] = useState(
@@ -163,12 +181,36 @@ export default function VotingPollPreview({ navigation }) {
               setRequiredPollAnswersToEnd(text);
             }}
           />
-          <Input
-            placeholder="answer choice 1"
-            onChangeText={(text) => {
-              setSingleQuestionPollAnswerChoices(text);
-            }}
-          />
+          <>
+            <Input
+              placeholder="answer choice here"
+              onChangeText={(text) => {
+                setSingleQuestionPollAnswerChoices(text);
+              }}
+            />
+            <Text>{numOfAnswers}</Text>
+            {/* {newAnswerChoices} */}
+            {extraAnswers}
+
+            <Button
+              title="+"
+              type="outline"
+              onPress={async () => {
+                await extraAnswers.push(
+                  <Input
+                    key={numOfAnswers}
+                    placeholder="answer choice here"
+                    onChangeText={(text) => {
+                      setSingleQuestionPollAnswerChoices(text);
+                    }}
+                  />
+                );
+                await setNumOfAnswers(numOfAnswers + 1);
+                addAnswers();
+              }}
+              buttonStyle={{ marginBottom: 20 }}
+            />
+          </>
           <Button
             type="solid"
             title="CREATE POLL"
