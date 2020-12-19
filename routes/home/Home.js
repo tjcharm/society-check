@@ -12,7 +12,7 @@ export default function Home({ navigation }) {
     >
       <Card
         containerStyle={{
-          borderRadius: "10%",
+          borderRadius: 10,
           height: "90%",
           backgroundColor: "#333",
           justifyContent: "center",
