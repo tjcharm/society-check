@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { Button, Card } from "react-native-elements";
 import VotingPollPreview from "./VotingPollPreview";
-import { pollCategories } from "../../appConfig/PollCategories";
+import { pollCategories } from "../../../appConfig/PollCategories";
 export default function VoteCategoryManager({ navigation, route }) {
   const [
     pollCategoriesFromAppConfig,

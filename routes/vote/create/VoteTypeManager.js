@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { Button, Card } from "react-native-elements";
-import VotingPollPreview from "./VotingPollPreview";
+import VotingPollPreview from "../consume/VotingPollPreview";
 export default function VoteTypeManager({ navigation }) {
   const [pollType, setPollType] = useState(null);
 

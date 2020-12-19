@@ -3,23 +3,21 @@ import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { Button, Card } from "react-native-elements";
 import VotingPollPreview from "./VotingPollPreview";
-
+import { getVotingPollUsingTypeAndCategory } from "../../../api/VotingPollApi";
 export default function VotingPollPreviewManager({ navigation, route }) {
   const [isLoading, setIsLoading] = useState(true);
   const { pollType, pollCategory } = route.params;
   const [pollsFromServer, setPollsFromServer] = useState(null);
 
   useEffect(() => {
-    fetch(
-      `${CURRENT_API}/votingPolls/pollsByTypeAndCategory/${pollType}/${pollCategory}`
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        // sets the data from database to inventory items
-        setPollsFromServer(data);
-      });
+    let getPollsFromApi = async () => {
+      let pollsFromApi = await getVotingPollUsingTypeAndCategory(
+        pollType,
+        pollCategory
+      );
+      setPollsFromServer(pollsFromApi);
+    };
+    getPollsFromApi();
   }, []);
 
   let displayedPollsFromServer = [];
