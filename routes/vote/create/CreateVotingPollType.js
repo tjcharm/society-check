@@ -13,22 +13,22 @@ export default function CreateVotingPollType({ navigation }) {
     <ScrollView>
       <View>
         <Card>
-          <Card.Title>
+          <Card.Title style={{ fontSize: 25 }}>
             Would you like to ask one question or more than one?
           </Card.Title>
           <Button
-            buttonStyle={{ margin: 5 }}
+            buttonStyle={{ marginVertical: 15 }}
             title="One Question"
             type="solid"
             onPress={async () => {
               await setPollType("singleQuestion");
-              navigation.navigate("Create Single Question Poll", {
+              navigation.navigate("Create Voting Poll Category", {
                 pollType: pollType,
               });
             }}
           />
           <Button
-            buttonStyle={{ margin: 5 }}
+            buttonStyle={{ marginVertical: 15 }}
             title="Multiple Questions"
             type="solid"
             onPress={() => {

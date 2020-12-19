@@ -21,7 +21,7 @@ export default function VoteIntro({ navigation }) {
           type="outline"
           buttonStyle={{ margin: 10 }}
           onPress={() => {
-            navigation.navigate("Select Create Voting Poll Type");
+            navigation.navigate("Create Voting Poll Type");
           }}
         />
         <Button
