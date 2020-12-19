@@ -1,8 +1,9 @@
+import { CURRENT_API } from "@env";
 import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { Button, Card } from "react-native-elements";
 import VotingPollPreview from "./VotingPollPreview";
-import { API } from "../../appConfig/ReactStoreApi";
+
 export default function VotingPollPreviewManager({ navigation, route }) {
   const [isLoading, setIsLoading] = useState(true);
   const { pollType, pollCategory } = route.params;
@@ -10,7 +11,7 @@ export default function VotingPollPreviewManager({ navigation, route }) {
 
   useEffect(() => {
     fetch(
-      `${API}/votingPolls/pollsByTypeAndCategory/${pollType}/${pollCategory}`
+      `${CURRENT_API}/votingPolls/pollsByTypeAndCategory/${pollType}/${pollCategory}`
     )
       .then((response) => {
         return response.json();
