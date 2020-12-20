@@ -7,7 +7,11 @@ import useForm from "../../../utils/useForm";
 export default function CreateVotingPoll({ navigation, route }) {
   const { pollType, pollCategory } = route.params;
 
-  const [values, handleChange] = useForm();
+  const initialState = {
+    Question: "hello",
+  };
+
+  const [values, handleChangeWithInitialState] = useForm(initialState);
 
   let createNewPoll = async () => {
     let createdPoll = await createNewVotingPoll(pollType, pollCategory);
@@ -22,7 +26,7 @@ export default function CreateVotingPoll({ navigation, route }) {
           placeholder="Question"
           name="Question"
           onChangeText={(Text) => {
-            handleChange(Text, "Question");
+            handleChangeWithInitialState("Question", Text);
           }}
         />
         {/* <Input
