@@ -8,7 +8,7 @@ export default function VoteIntro({ navigation }) {
       <Card
         containerStyle={{
           borderRadius: 10,
-          height: "100%",
+          height: 700,
           backgroundColor: "#333",
         }}
       >
@@ -16,16 +16,17 @@ export default function VoteIntro({ navigation }) {
           Would you like to answer some poll questions or create some of your
           own?
         </Card.Title>
+
         <Button
           title="Create A Poll"
           type="outline"
-          buttonStyle={{ margin: 10 }}
+          buttonStyle={{ marginVertical: 35 }}
           onPress={() => {
             navigation.navigate("Create Voting Poll Type");
           }}
         />
         <Button
-          buttonStyle={{ margin: 5 }}
+          buttonStyle={{ marginVertical: 15 }}
           title="Single Question Polls"
           type="solid"
           onPress={() => {
@@ -35,7 +36,7 @@ export default function VoteIntro({ navigation }) {
           }}
         />
         <Button
-          buttonStyle={{ margin: 5 }}
+          buttonStyle={{ marginVertical: 15 }}
           title="Multiple Question Polls"
           type="solid"
           onPress={() => {
