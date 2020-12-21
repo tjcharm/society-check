@@ -69,7 +69,15 @@ export default function CreateVotingPoll({ navigation, route }) {
             createNewPoll();
           }}
         />
-        <Text> question value ---> {values.Question}</Text>
+        <Text>
+          {" "}
+          requiredPollAnswersToEnd value ---> {values.requiredPollAnswersToEnd}
+        </Text>
+        <Text>
+          {" "}
+          singleQuestionPollQuestion value --->{" "}
+          {values.singleQuestionPollQuestion}
+        </Text>
       </Card>
     </ScrollView>
   );
