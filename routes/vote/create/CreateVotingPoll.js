@@ -8,7 +8,8 @@ export default function CreateVotingPoll({ navigation, route }) {
   const { pollType, pollCategory } = route.params;
 
   const initialState = {
-    Question: "hello",
+    singleQuestionPollQuestion: "hello",
+    requiredPollAnswersToEnd: "1",
   };
 
   const [values, handleChangeWithInitialState] = useForm(initialState);
@@ -24,15 +25,18 @@ export default function CreateVotingPoll({ navigation, route }) {
         {/* <Input placeholder="Poll Title" onChangeText={handleChange} /> */}
         <Input
           placeholder="Question"
-          name="Question"
+          name="singleQuestionPollQuestion"
           onChangeText={(Text) => {
-            handleChangeWithInitialState("Question", Text);
+            handleChangeWithInitialState("singleQuestionPollQuestion", Text);
           }}
         />
-        {/* <Input
+        <Input
           placeholder="Number of answers wanted"
-          onChangeText={(text) => {}}
-        /> */}
+          name="requiredPollAnswersToEnd"
+          onChangeText={(Text) => {
+            handleChangeWithInitialState("requiredPollAnswersToEnd", Text);
+          }}
+        />
         {/* <View style={{ flexDirection: "row" }}> */}
         {/* <input
             className="py-4 m-1  bg-gray-350 rounded"
@@ -65,7 +69,7 @@ export default function CreateVotingPoll({ navigation, route }) {
             createNewPoll();
           }}
         />
-        <Text>{values.Question}</Text>
+        <Text> question value ---> {values.Question}</Text>
       </Card>
     </ScrollView>
   );
