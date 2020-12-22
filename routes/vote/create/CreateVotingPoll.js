@@ -4,12 +4,34 @@ import { Button, Card, Input, Overlay, Divider } from "react-native-elements";
 import { pollCategories } from "../../../appConfig/PollCategories";
 import { createNewVotingPoll } from "../../../api/VotingPollApi";
 import useForm from "../../../utils/useForm";
+import useDynamicForm from "../../../utils/useDynamicForm";
 export default function CreateVotingPoll({ navigation, route }) {
   const { pollType, pollCategory } = route.params;
 
+  const [returnedItems, addFormItem] = useDynamicForm();
+
   const initialState = {
-    singleQuestionPollQuestion: "hello",
+    pollType: pollType,
+
+    pollCategory: pollCategory,
+
+    pollId: Math.random(),
+
+    pollPosterUserId: "1",
+
+    pollPosterUserUsername: "tjcharm",
+
+    pollTitle: null,
+
     requiredPollAnswersToEnd: "1",
+
+    singleQuestionPollQuestion: null,
+
+    singleQuestionPollAnswerChoices: null,
+
+    multipleQuestionPollQuestions: null,
+
+    multipleQuestionPollAnswerChoices: null,
   };
 
   const [values, handleChangeWithInitialState] = useForm(initialState);
@@ -22,7 +44,13 @@ export default function CreateVotingPoll({ navigation, route }) {
   return (
     <ScrollView>
       <Card>
-        {/* <Input placeholder="Poll Title" onChangeText={handleChange} /> */}
+        <Input
+          placeholder="Poll Title"
+          name="pollTitle"
+          onChangeText={(Text) => {
+            handleChangeWithInitialState("pollTitle", Text);
+          }}
+        />
         <Input
           placeholder="Question"
           name="singleQuestionPollQuestion"
@@ -37,30 +65,30 @@ export default function CreateVotingPoll({ navigation, route }) {
             handleChangeWithInitialState("requiredPollAnswersToEnd", Text);
           }}
         />
-        {/* <View style={{ flexDirection: "row" }}> */}
-        {/* <input
-            className="py-4 m-1  bg-gray-350 rounded"
-            type="username"
-            name="username"
-            value={values.username || ""}
-            onChange={handleChange}
-          ></input> */}
-        {/* <Input
+        <View style={{ flexDirection: "row" }}>
+          {/* <Text>{currentDynamicFormItems}</Text> */}
+          <Input
             containerStyle={{ width: "70%" }}
             placeholder="answer choice here"
-            onChangeText={(text) => {}}
-          /> */}
+            onChangeText={(Text) => {
+              // dynamic answer choices
+            }}
+          />
 
-        {/* <Button
+          <Button
             containerStyle={{
               width: "30%",
             }}
             title="+"
             type="outline"
-            onPress={() => {}}
+            onPress={() => {
+              addFormItem();
+            }}
             buttonStyle={{ marginBottom: 20 }}
           />
-        </View> */}
+        </View>
+
+        {returnedItems}
 
         <Button
           type="solid"
@@ -69,14 +97,16 @@ export default function CreateVotingPoll({ navigation, route }) {
             createNewPoll();
           }}
         />
-        <Text>
-          {" "}
-          requiredPollAnswersToEnd value ---> {values.requiredPollAnswersToEnd}
-        </Text>
+
+        <Text>poll title ---> {values.pollTitle}</Text>
         <Text>
           {" "}
           singleQuestionPollQuestion value --->{" "}
           {values.singleQuestionPollQuestion}
+        </Text>
+        <Text>
+          {" "}
+          requiredPollAnswersToEnd value ---> {values.requiredPollAnswersToEnd}
         </Text>
       </Card>
     </ScrollView>
