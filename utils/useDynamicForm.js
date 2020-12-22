@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { Button, Card, Input, Overlay, Divider } from "react-native-elements";
+
 const useDynamicForm = () => {
   const [returnedItems, setReturnedItems] = useState([]);
   const [count, setCount] = useState(1);
@@ -16,19 +17,15 @@ const useDynamicForm = () => {
           containerStyle={{ width: "70%" }}
           placeholder={key.toString()}
           onChangeText={(Text) => {
-            // dynamic answer choices
+            // dynamic answer state here
           }}
         />
-
         <Button
           containerStyle={{
             width: "30%",
           }}
-          title="+"
+          title={key.toString()}
           type="outline"
-          onPress={() => {
-            addFormItem();
-          }}
           buttonStyle={{ marginBottom: 20 }}
         />
       </View>,
