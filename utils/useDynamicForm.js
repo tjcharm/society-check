@@ -6,7 +6,7 @@ const useDynamicForm = () => {
   const [returnedItems, setReturnedItems] = useState([]);
   const [count, setCount] = useState(1);
 
-  const addFormItem = async () => {
+  const addFormItem = async (handleChangeWithInitialState) => {
     let key = Math.random();
     // setCount(count + 1);
     setReturnedItems((returnedItems) => [
@@ -14,19 +14,11 @@ const useDynamicForm = () => {
       <View style={{ flexDirection: "row" }} key={key}>
         {/* <Text>{key}</Text> */}
         <Input
-          containerStyle={{ width: "70%" }}
+          containerStyle={{ width: "100%" }}
           placeholder={key.toString()}
           onChangeText={(Text) => {
-            // dynamic answer state here
+            handleChangeWithInitialState("singleQuestionPollQuestion", Text);
           }}
-        />
-        <Button
-          containerStyle={{
-            width: "30%",
-          }}
-          title={key.toString()}
-          type="outline"
-          buttonStyle={{ marginBottom: 20 }}
         />
       </View>,
     ]);

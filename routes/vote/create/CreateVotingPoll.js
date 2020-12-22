@@ -71,7 +71,7 @@ export default function CreateVotingPoll({ navigation, route }) {
             containerStyle={{ width: "70%" }}
             placeholder="answer choice here"
             onChangeText={(Text) => {
-              // dynamic answer choices
+              handleChangeWithInitialState("singleQuestionPollQuestion", Text);
             }}
           />
 
@@ -82,7 +82,7 @@ export default function CreateVotingPoll({ navigation, route }) {
             title="+"
             type="outline"
             onPress={() => {
-              addFormItem();
+              addFormItem(handleChangeWithInitialState);
             }}
             buttonStyle={{ marginBottom: 20 }}
           />
