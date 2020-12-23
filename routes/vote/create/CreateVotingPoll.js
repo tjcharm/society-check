@@ -8,6 +8,11 @@ import useDynamicForm from "../../../utils/useDynamicForm";
 export default function CreateVotingPoll({ navigation, route }) {
   const { pollType, pollCategory } = route.params;
 
+  const [pollQuestionAnswers, setPollQuestionAnswers] = useState([
+    { id: "1", answer: "yes is does work" },
+    { id: "2", answer: "no it does not work" },
+  ]);
+
   const [returnedItems, addFormItem] = useDynamicForm();
 
   const initialState = {
@@ -114,7 +119,22 @@ export default function CreateVotingPoll({ navigation, route }) {
         <Text>
           {" "}
           poll answer choices value --->{" "}
-          {values.singleQuestionPollAnswerChoices}
+          {pollQuestionAnswers.map((answer) => {
+            return (
+              <View containerStyle={{ width: "100%" }} key={answer.id}>
+                <Text>{answer.answer}</Text>
+                <Input
+                  containerStyle={{ width: "100%" }}
+                  onChangeText={(Text) => {
+                    handleChangeWithInitialState(
+                      "singleQuestionPollQuestion",
+                      Text
+                    );
+                  }}
+                />
+              </View>
+            );
+          })}
         </Text>
       </Card>
     </ScrollView>

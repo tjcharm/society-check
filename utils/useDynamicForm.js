@@ -4,6 +4,7 @@ import { Button, Card, Input, Overlay, Divider } from "react-native-elements";
 
 const useDynamicForm = () => {
   const [returnedItems, setReturnedItems] = useState([]);
+
   const [count, setCount] = useState(1);
 
   const addFormItem = async (handleChangeWithInitialState) => {
