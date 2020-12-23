@@ -17,7 +17,10 @@ const useDynamicForm = () => {
           containerStyle={{ width: "100%" }}
           placeholder={key.toString()}
           onChangeText={(Text) => {
-            handleChangeWithInitialState("singleQuestionPollQuestion", Text);
+            handleChangeWithInitialState(
+              "singleQuestionPollAnswerChoices",
+              Text
+            );
           }}
         />
       </View>,

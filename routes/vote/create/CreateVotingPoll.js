@@ -71,7 +71,10 @@ export default function CreateVotingPoll({ navigation, route }) {
             containerStyle={{ width: "70%" }}
             placeholder="answer choice here"
             onChangeText={(Text) => {
-              handleChangeWithInitialState("singleQuestionPollQuestion", Text);
+              handleChangeWithInitialState(
+                "singleQuestionPollAnswerChoices",
+                Text
+              );
             }}
           />
 
@@ -107,6 +110,11 @@ export default function CreateVotingPoll({ navigation, route }) {
         <Text>
           {" "}
           requiredPollAnswersToEnd value ---> {values.requiredPollAnswersToEnd}
+        </Text>
+        <Text>
+          {" "}
+          poll answer choices value --->{" "}
+          {values.singleQuestionPollAnswerChoices}
         </Text>
       </Card>
     </ScrollView>
